@@ -40,7 +40,11 @@ Projects.forEach(project => {
 
     console.log(`Compiling ${project.projectName}`)
 
-    child_process.execSync(`dotnet build ${projectPath}`)
+    // spawn a new process to compile the project
+    child_process.spawnSync("dotnet", ["restore", projectPath])
+    const compileProcess = child_process.spawnSync("dotnet", ["build", projectPath])
+    // print the output of the compilation
+    compileProcess.stdout && console.log(compileProcess.stdout.toString())
     fs.copyFileSync(dllPath, outputPath)
 
     console.log(`Compiled ${project.projectName}`)
