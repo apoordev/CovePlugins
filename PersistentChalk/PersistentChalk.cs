@@ -4,7 +4,7 @@ using Cove.Server.Chalk;
 using System.Text.Json;
 
 // Change the namespace and class name!
-namespace MyCovePlugin
+namespace PersistentChalk
 {
     public class PersistentChalk : CovePlugin
     {
