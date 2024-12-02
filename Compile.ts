@@ -45,3 +45,5 @@ Projects.forEach(project => {
 
     console.log(`Compiled ${project.projectName}`)
 })
+
+console.log("Compilation complete")
