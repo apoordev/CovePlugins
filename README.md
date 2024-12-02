@@ -1,4 +1,4 @@
-# A collection of cove plugins for Cove
+# A collection of cove plugins
 
 - Static Rain
 	- Spawns constant rain in the world
