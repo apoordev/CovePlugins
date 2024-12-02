@@ -32,19 +32,16 @@ namespace StaticRain
         public override void onInit()
         {
 
-            docksRain = spawnRainCloud();
-            docksRain.isStaic = true;
-            docksRain.pos = docksPosition;
-
-            lakeRain = spawnRainCloud();
-            lakeRain.isStaic = true;
-            lakeRain.pos = lakePosition;
+            Log("Static Rain!");
 
         }
 
         public override void onUpdate()
         {
             base.onUpdate();
+
+            if (!Steamworks.SteamAPI.IsSteamRunning())
+                return;    
 
             if (!ParentServer.serverOwnedInstances.Contains(docksRain))
             {

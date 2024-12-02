@@ -2,10 +2,80 @@ using Cove.Server.Plugins;
 using Cove.Server;
 using Cove.Server.Chalk;
 using System.Text.Json;
+using System.Text.Json.Serialization;
+using Cove.GodotFormat;
 
 // Change the namespace and class name!
 namespace PersistentChalk
 {
+    public class Vector2Converter : JsonConverter<Vector2>
+    {
+        public override Vector2 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            var doc = JsonDocument.ParseValue(ref reader);
+            var root = doc.RootElement;
+
+            float x = root.GetProperty("X").GetSingle();
+            float y = root.GetProperty("Y").GetSingle();
+
+            return new Vector2(x, y);
+        }
+
+        public override void Write(Utf8JsonWriter writer, Vector2 value, JsonSerializerOptions options)
+        {
+            writer.WriteStartObject();
+            writer.WriteNumber("X", value.x);
+            writer.WriteNumber("Y", value.y);
+            writer.WriteEndObject();
+        }
+    }
+
+    public class ChalkCanvasConverter : JsonConverter<ChalkCanvas>
+    {
+        public override ChalkCanvas Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            var doc = JsonDocument.ParseValue(ref reader);
+            var root = doc.RootElement;
+
+            long canvasID = root.GetProperty("CanvasID").GetInt64();
+            ChalkCanvas canvas = new ChalkCanvas(canvasID);
+
+            if (root.TryGetProperty("ChalkImage", out JsonElement chalkImageElement))
+            {
+                var chalkImage = JsonSerializer.Deserialize<Dictionary<string, int>>(chalkImageElement.GetRawText(), options);
+
+                var deserializedChalkImage = chalkImage.ToDictionary(
+                    kvp => JsonSerializer.Deserialize<Vector2>(kvp.Key, options),
+                    kvp => kvp.Value
+                );
+
+                canvas.chalkImage = deserializedChalkImage;
+            }
+
+            return canvas;
+        }
+
+        public override void Write(Utf8JsonWriter writer, ChalkCanvas value, JsonSerializerOptions options)
+        {
+            writer.WriteStartObject();
+
+            writer.WriteNumber("CanvasID", value.canvasID);
+
+            writer.WritePropertyName("ChalkImage");
+            writer.WriteStartObject();
+
+            foreach (var kvp in value.chalkImage)
+            {
+                var key = JsonSerializer.Serialize(kvp.Key, options);
+                writer.WritePropertyName(key);
+                writer.WriteNumberValue(kvp.Value);
+            }
+
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+    }
+
     public class PersistentChalk : CovePlugin
     {
         public PersistentChalk(CoveServer server) : base(server) { }
@@ -56,10 +126,24 @@ namespace PersistentChalk
             Log("Saving Chalk Data!");
         }
 
+        public override void onEnd()
+        {
+            base.onEnd();
+
+            saveChalk();
+            Log("Saving Chalk Data!");
+        }
+
+        private static JsonSerializerOptions jsonOptions = new JsonSerializerOptions 
+        { 
+            IncludeFields = true,
+            Converters = { new Vector2Converter(), new ChalkCanvasConverter()}
+        };
+
         public void loadChalk(byte[] chalkData)
         {
             // deserialize the chalk data
-            List<ChalkCanvas> chalk = JsonSerializer.Deserialize<List<ChalkCanvas>>(chalkData);
+            var chalk = JsonSerializer.Deserialize<List<ChalkCanvas>>(chalkData, jsonOptions);
             if (chalk != null)
             {
                 // set the chalk data to the server's chalk data
@@ -77,7 +161,7 @@ namespace PersistentChalk
             List<ChalkCanvas> chalkData = ParentServer.chalkCanvas;
 
             // use the json formatter to serialize the chalk data
-            string json = JsonSerializer.Serialize(chalkData);
+            string json = JsonSerializer.Serialize(chalkData, jsonOptions);
 
             // write the json string to a file
             File.WriteAllText(Path.Combine(currentDir, ChalkFile), json);

@@ -8,8 +8,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistentChalk", "PersistentChalk\PersistentChalk.csproj", "{190A8889-AADA-4323-BEF1-33EAA1DB2139}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5D9D2556-E4DA-4AB0-80A1-E0B3ED849F50}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cove", "WebFishingCove\Cove\Cove.csproj", "{AC58CFF2-4933-4CCF-9B5B-3B107E9D5E77}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cove", "WebFishingCove\Cove\Cove.csproj", "{E46060BE-E164-4D2E-93C0-DCE7FB0774AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +28,10 @@ Global
 		{190A8889-AADA-4323-BEF1-33EAA1DB2139}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{190A8889-AADA-4323-BEF1-33EAA1DB2139}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{190A8889-AADA-4323-BEF1-33EAA1DB2139}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC58CFF2-4933-4CCF-9B5B-3B107E9D5E77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC58CFF2-4933-4CCF-9B5B-3B107E9D5E77}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC58CFF2-4933-4CCF-9B5B-3B107E9D5E77}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC58CFF2-4933-4CCF-9B5B-3B107E9D5E77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E46060BE-E164-4D2E-93C0-DCE7FB0774AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E46060BE-E164-4D2E-93C0-DCE7FB0774AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E46060BE-E164-4D2E-93C0-DCE7FB0774AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E46060BE-E164-4D2E-93C0-DCE7FB0774AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
