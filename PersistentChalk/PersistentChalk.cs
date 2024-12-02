@@ -1,7 +1,6 @@
 ﻿using Cove.Server.Plugins;
 using Cove.Server;
 using Cove.Server.Chalk;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
 
 // Change the namespace and class name!

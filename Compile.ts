@@ -30,8 +30,17 @@ if (!fs.existsSync(outputFolder)) {
     fs.mkdirSync(outputFolder)
 }
 
-// compile each project
+// fetch the cove git repository
+// https://github.com/DrMeepso/WebFishingCove/tree/main
+
+// clone the repository
 import * as child_process from 'child_process'
+
+console.log("Cloning WebFishingCove repository...")
+child_process.spawnSync("git", ["clone", "https://github.com/DrMeepso/WebFishingCove.git"])
+console.log("Cloned WebFishingCove repository")
+
+// compile each project
 
 Projects.forEach(project => {
     const projectPath = project.projectFolder + "/" + project.projectName + ".csproj"
