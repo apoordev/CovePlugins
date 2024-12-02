@@ -44,6 +44,12 @@ import * as child_process from 'child_process'
 
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
+    // compile the WebFishingCove project
+    console.log("Compiling WebFishingCove project...")
+    child_process.spawnSync("dotnet", ["restore", "./WebFishingCove/Cove/Cove.csproj"])
+
+    child_process.spawnSync("dotnet", ["build", "./WebFishingCove/Cove/Cove.csproj"])
+
     // compile each project
 
     Projects.forEach(async (project) => {
