@@ -14,16 +14,29 @@ namespace StaticRain
         internal RainCloud lakeRain;
 
         public Vector3 docksPosition = new Vector3(151f, 42, 1.5f);
-        public Vector3 lakePosition = new Vector3(22.5, 42, 13);
+        public Vector3 lakePosition = new Vector3(22.5f, 42, 13);
+
+        public RainCloud spawnRainCloud()
+        {
+            ParentServer.spawnRainCloud();
+            WFActor latest = ParentServer.serverOwnedInstances[ParentServer.serverOwnedInstances.Count - 1];
+            if (latest is RainCloud)
+            {
+                return (RainCloud)latest;
+            } else
+            {
+                return null;
+            }
+        }
 
         public override void onInit()
         {
 
-            docksRain = ParentServer.spawnRainCloud();
+            docksRain = spawnRainCloud();
             docksRain.isStaic = true;
             docksRain.pos = docksPosition;
 
-            lakeRain = ParentServer.spawnRainCloud();
+            lakeRain = spawnRainCloud();
             lakeRain.isStaic = true;
             lakeRain.pos = lakePosition;
 
@@ -36,7 +49,7 @@ namespace StaticRain
             if (!ParentServer.serverOwnedInstances.Contains(docksRain))
             {
                 // the rain cloud has been destroyed / despawned
-                docksRain = ParentServer.spawnRainCloud();
+                docksRain = spawnRainCloud();
                 docksRain.isStaic = true;
                 docksRain.pos = docksPosition;
             }
@@ -44,7 +57,7 @@ namespace StaticRain
             if (!ParentServer.serverOwnedInstances.Contains(lakeRain))
             {
                 // the rain cloud has been destroyed / despawned
-                lakeRain = ParentServer.spawnRainCloud();
+                lakeRain = spawnRainCloud();
                 lakeRain.isStaic = true;
                 lakeRain.pos = lakePosition;
             }

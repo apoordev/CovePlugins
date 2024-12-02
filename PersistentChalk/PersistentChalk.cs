@@ -29,6 +29,19 @@ namespace MyCovePlugin
             }
         }
 
+        public long lastUpdate = DateTimeOffset.UtcNow.ToUnixTimeSeconds(); // now
+        public override void onUpdate()
+        {
+            base.onUpdate();
+            // auto save the chalk data every 5 minutes if a player is online
+            if (ParentServer.AllPlayers.Count > 0 && DateTimeOffset.UtcNow.ToUnixTimeSeconds() - lastUpdate > 300)
+            {
+                saveChalk();
+                lastUpdate = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                Log("Saving Chalk Data!");
+            }
+        }
+
         public void loadChalk(byte[] chalkData)
         {
             // deserialize the chalk data
