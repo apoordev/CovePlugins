@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35506.116 d17.12
+VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticRain", "StaticRain\StaticRain.csproj", "{BAA88135-3B74-4FAC-B5EA-80891B3CAE7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistentChalk", "PersistentChalk\PersistentChalk.csproj", "{190A8889-AADA-4323-BEF1-33EAA1DB2139}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BAA88135-3B74-4FAC-B5EA-80891B3CAE7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAA88135-3B74-4FAC-B5EA-80891B3CAE7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAA88135-3B74-4FAC-B5EA-80891B3CAE7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{190A8889-AADA-4323-BEF1-33EAA1DB2139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{190A8889-AADA-4323-BEF1-33EAA1DB2139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{190A8889-AADA-4323-BEF1-33EAA1DB2139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{190A8889-AADA-4323-BEF1-33EAA1DB2139}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

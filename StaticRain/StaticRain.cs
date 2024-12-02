@@ -6,9 +6,9 @@ using Cove.GodotFormat;
 // Change the namespace and class name!
 namespace StaticRain
 {
-    public class Plugin : CovePlugin
+    public class StaticRain : CovePlugin
     {
-        public Plugin(CoveServer server) : base(server) { }
+        public StaticRain(CoveServer server) : base(server) { }
 
         internal RainCloud docksRain;
         internal RainCloud lakeRain;
