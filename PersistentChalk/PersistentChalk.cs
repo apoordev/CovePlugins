@@ -11,14 +11,16 @@ namespace PersistentChalk
         public PersistentChalk(CoveServer server) : base(server) { }
         private string currentDir = Directory.GetCurrentDirectory();
 
+        private const string ChalkFile = "chalk.json";
+
         public override void onInit()
         {
             base.onInit();
 
-            // check if there is a chalk.bin file in the current directory
-            if (File.Exists(Path.Combine(currentDir, "chalk.json")))
+            // check if there is a chalk.json file in the current directory
+            if (File.Exists(Path.Combine(currentDir, ChalkFile)))
             {
-                byte[] chalkData = File.ReadAllBytes(Path.Combine(currentDir, "chalk.bin"));
+                byte[] chalkData = File.ReadAllBytes(Path.Combine(currentDir, ChalkFile));
                 Log("Chalk data file found. Loading chalk data...");
                 loadChalk(chalkData);
             } else
@@ -65,7 +67,7 @@ namespace PersistentChalk
             string json = JsonSerializer.Serialize(chalkData);
 
             // write the json string to a file
-            File.WriteAllText(Path.Combine(currentDir, "chalk.json"), json);
+            File.WriteAllText(Path.Combine(currentDir, ChalkFile), json);
         }
     }
 }
