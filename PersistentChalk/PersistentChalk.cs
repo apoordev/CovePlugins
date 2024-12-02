@@ -31,16 +31,28 @@ namespace PersistentChalk
         }
 
         public long lastUpdate = DateTimeOffset.UtcNow.ToUnixTimeSeconds(); // now
+        public bool hadOfflineUpdate = false;
         public override void onUpdate()
         {
             base.onUpdate();
+
             // auto save the chalk data every 5 minutes if a player is online
-            if (ParentServer.AllPlayers.Count > 0 && DateTimeOffset.UtcNow.ToUnixTimeSeconds() - lastUpdate > 300)
-            {
-                saveChalk();
-                lastUpdate = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-                Log("Saving Chalk Data!");
-            }
+            if (DateTimeOffset.UtcNow.ToUnixTimeSeconds() - lastUpdate <= 300)
+                return;
+
+            lastUpdate = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+
+            if (ParentServer.AllPlayers.Count > 0)
+                // Players are online again, reset hadOfflineUpdate
+                hadOfflineUpdate = false;
+            else if (ParentServer.AllPlayers.Count == 0 && !hadOfflineUpdate)
+                // We're doing a final update, mark as such
+                hadOfflineUpdate = true;
+            else
+                return;
+
+            saveChalk();
+            Log("Saving Chalk Data!");
         }
 
         public void loadChalk(byte[] chalkData)
