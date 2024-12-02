@@ -23,7 +23,7 @@ jobs:
         dotnet-version: '8.0.x'  # Specify your .NET version
 
     - name: run Compile.ts
-      run: npm i -g typescript ts-node
+      run: npm i -g typescript ts-node @types/node
 
     - name: run Compile.ts
       run: npx ts-node Compile.ts
