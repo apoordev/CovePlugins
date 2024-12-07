@@ -98,6 +98,21 @@ namespace PersistentChalk
                 // log that the chalk data file does not exist
                 Log("Cannot find chalk data file.");
             }
+
+            RegisterCommand("savechalk", (player, args) =>
+            {
+
+                if (!IsPlayerAdmin(player))
+                {
+                    SendPlayerChatMessage(player, "You do not have permission to use this command!");
+                    return;
+                }
+
+                saveChalk();
+                SendPlayerChatMessage(player, "The chalk has been saved!");
+            });
+            SetCommandDescription("savechalk", "Saves the chalk data");
+
         }
 
         public long lastUpdate = DateTimeOffset.UtcNow.ToUnixTimeSeconds(); // now
@@ -157,8 +172,8 @@ namespace PersistentChalk
 
         public void saveChalk()
         {
-            // get the canvas data
-            List<ChalkCanvas> chalkData = ParentServer.chalkCanvas;
+            // get the canvas data, it must be a clone so we dont mess up the original data or error the thread
+            List<ChalkCanvas> chalkData = new List<ChalkCanvas>(ParentServer.chalkCanvas);
 
             // use the json formatter to serialize the chalk data
             string json = JsonSerializer.Serialize(chalkData, jsonOptions);

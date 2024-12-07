@@ -18,15 +18,7 @@ namespace StaticRain
 
         public RainCloud spawnRainCloud()
         {
-            ParentServer.spawnRainCloud();
-            WFActor latest = ParentServer.serverOwnedInstances[ParentServer.serverOwnedInstances.Count - 1];
-            if (latest is RainCloud)
-            {
-                return (RainCloud)latest;
-            } else
-            {
-                return null;
-            }
+            return ParentServer.spawnRainCloud() as RainCloud;
         }
 
         public override void onInit()
