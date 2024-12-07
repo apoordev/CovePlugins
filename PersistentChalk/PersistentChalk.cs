@@ -134,7 +134,7 @@ namespace PersistentChalk
             if (ParentServer.AllPlayers.Count == 0 && !hadOfflineUpdate)
                 // We're doing a final update, mark as such
                 hadOfflineUpdate = true;
-            else
+            else if (hadOfflineUpdate)
                 return;
 
             saveChalk();
@@ -149,8 +149,8 @@ namespace PersistentChalk
             Log("Saving Chalk Data!");
         }
 
-        private static JsonSerializerOptions jsonOptions = new JsonSerializerOptions 
-        { 
+        private static JsonSerializerOptions jsonOptions = new JsonSerializerOptions
+        {
             IncludeFields = true,
             Converters = { new Vector2Converter(), new ChalkCanvasConverter()}
         };
