@@ -147,6 +147,8 @@ namespace PersistentChalk
 
             saveChalk();
             Log("Saving Chalk Data!");
+
+            UnregisterCommand("savechalk");
         }
 
         private static JsonSerializerOptions jsonOptions = new JsonSerializerOptions
