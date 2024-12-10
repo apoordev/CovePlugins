@@ -1,0 +1,13 @@
+[Unit]
+Description=Webfishing Cove Server
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+TimeoutStartSec=0
+WorkingDirectory=/home/gamer/Servers/WebFishing/publish
+ExecStartPre=/bin/sleep 60
+ExecStart=/usr/bin/tmux new-session -A -d -s Cove '/home/gamer/Servers/WebFishing/publish/Cove'
+ExecStop=/usr/bin/tmux send-keys -t Cove:0.0 C-z 'exit' Enter
+
+[Install]
+WantedBy=default.target
