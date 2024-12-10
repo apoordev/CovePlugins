@@ -1,0 +1,12 @@
+[
+{
+"interval": "0:0:5",
+"message": "testing"
+
+},
+{
+"interval": "0:1:0",
+"message": "this is a test"
+
+}
+]

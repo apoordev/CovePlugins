@@ -15,6 +15,11 @@ const Projects: Array<Project> = [
         "dllName": "StaticRain.dll",
         "projectFolder": "StaticRain",
         "projectName": "StaticRain"
+    },
+    {
+	"dllName": "ChatNotifier.dll",
+        "projectFolder": "ChatNotifier",
+        "projectName": "ChatNotifier"
     }
 ]
 
