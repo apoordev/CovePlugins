@@ -53,5 +53,15 @@ namespace StaticRain
 
         }
 
+        public override void onEnd()
+        {
+            base.onEnd();
+
+            // remove the actors when the server reloads
+            RemoveServerActor(docksRain);
+            RemoveServerActor(lakeRain);
+
+        }
+
     }
 }
